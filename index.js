@@ -38,7 +38,7 @@ async function main() {
 
   let data = entriesString.join('\n')
   console.log('data', data)
-  fs.writeFile('snippets.csv', data, (err) => {
+  fs.writeFile('output/snippets.csv', data, (err) => {
     if (err) {
       console.log('error', err)
     }
