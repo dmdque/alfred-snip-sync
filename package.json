@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sync": "rm output/* && AIRTABLE_API_KEY=api_key BASE_ID=appy67hF0QdOJEVMX node index.js && cd output && python ../lib/import-alfred-snippets/importSnippets.py && rm /Users/danielque/Dropbox/MyApps/Alfred/Alfred.alfredpreferences/snippets/Sync\\ Ethereum\\ Addresses/* && cp *.json '/Users/danielque/Dropbox/MyApps/Alfred/Alfred.alfredpreferences/snippets/Sync Ethereum Addresses/'"
   },
   "author": "",
   "license": "ISC",

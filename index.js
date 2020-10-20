@@ -9,13 +9,14 @@ async function getRecords() {
   return new Promise((resolve, reject) => {
     let entries = []
     base('Ethereum Addresses').select({
-      maxRecords: 100
+      maxRecords: 100,
     }).eachPage(function page(records, fetchNextPage) {
       records.forEach(function(record) {
         let project = record.fields.Project || ''
-        let name = record.fields['Contract Name'] || ''
+        let contractName = record.fields['Contract Name'] || ''
+        let name = record.fields.Name || ''
         let address = record.fields.Address || ''
-        entries.push([project, name, address])
+        entries.push([project, contractName, name, address])
       })
       fetchNextPage()
     }, function done(err) {
@@ -31,9 +32,10 @@ async function main() {
   let entries = await getRecords().catch((error) => { console.log('error:', error); })
   let entriesString = []
   entries.forEach(function(entry) {
-    let name = entry[0] + ':' + entry[1]
+    console.log('entry', entry)
+    let name = entry[0] + ':' + entry[1] + ':' + entry[2]
     let keyword = entry[1].toLowerCase()
-    entriesString.push([name, keyword, entry[2]].join(','))
+    entriesString.push([name, keyword, entry[3]].join(','))
   })
 
   let data = entriesString.join('\n')
